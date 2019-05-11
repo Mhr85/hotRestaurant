@@ -28,7 +28,3 @@ app.use(express.json());
 app.post("/reservations", function(req, res) {
 
 })
-
-app.get('/', (req, res) => res.send('Hot Restaurant'))
-
-app.listen(port, () => console.log(`Hot Restaurant app is listening on port ${port}!`))

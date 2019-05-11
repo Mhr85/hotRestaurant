@@ -53,6 +53,7 @@ let resCount = 0;
 app.get("/reservations/:reservation", function(req, res) {
   let reservation = req.params.reservation;
 
+
   console.log(reservation);
 
   for (var i = 0; i < currentRes.length; i++) {
@@ -62,6 +63,10 @@ app.get("/reservations/:reservation", function(req, res) {
   }
   return res.json(false);
 });
+
+  // app.post("/reservations", function(req, res) {
+
+  // })
 
 app.post("/reservation", function(req, res) {
   let reservation = req.body;

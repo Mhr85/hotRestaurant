@@ -1,33 +1,47 @@
+// GLOBAL VARIABLES
+//======================================================
+  
+  const express = require('express');
+  const app = express();
+  const port = process.env.PORT ||  3000;
+  const path = require("path");
+  const axios = require('axios');
 
-const express = require('express');
-const app = express();
-const port = process.env.PORT ||  3000;
-const path = require("path");
+//======================================================
 
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "home.html"));
-});
 
-app.get("/newsletter", function(req, res) {
-    res.sendFile(path.join(__dirname, "newsletter.html"));
+// ROUTING
+//======================================================
+  
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "home.html"));
   });
 
-app.get("/reservation", function(req, res) {
-  res.sendFile(path.join(__dirname, "reservation.html"));
-});
 
-app.get("/tables", function(req, res) {
-  res.sendFile(path.join(__dirname, "tables.html"));
-});
+  app.get("/newsletter", function(req, res) {
+      res.sendFile(path.join(__dirname, "newsletter.html"));
+    });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
-// Starts the server to begin listening
-// =============================================================
-app.listen(port, function() {
-  console.log("App listening on http://localhost:" + port);
-});
+
+  app.get("/reservation", function(req, res) {
+    res.sendFile(path.join(__dirname, "reservation.html"));
+  });
+
+  app.get("/tables", function(req, res) {
+    res.sendFile(path.join(__dirname, "tables.html"));
+  });
+
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+
+
+
+  // Starts the server to begin listening
+  app.listen(port, function() {
+    console.log("App listening on http://localhost:" + port);
+  });
+//======================================================
 
 let currentRes = [
     {
@@ -54,6 +68,7 @@ let waitingList = [
 
 //   console.log(reservation);
 
+
 //   for (var i = 0; i < currentRes.length; i++) {
 //     if (reservation === currentRes[i].routeName) {
 //       return res.json(reservation[i]);
@@ -65,6 +80,7 @@ let waitingList = [
 //display all CURRENT reservations
 app.get("/tables", function(req, res) {
   return res.json(currentRes);
+
 });
 
 //create NEW reservations

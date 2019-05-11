@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT ||  3000;
 const path = require("path");
-const axios = require('axios');
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
@@ -32,6 +31,7 @@ app.listen(port, function() {
 
 let currentRes = [
     {
+        routeName: 'user',
         userName: 'Brent Abruzese',
         phone: '848-213-2522',
         email: 'brent.abruzese@gmail.com',
@@ -41,6 +41,7 @@ let currentRes = [
 
 let waitingList = [
     {
+        routeName: 'user',
         userName: 'Som Ramnani',
         phone: '800-555-1212',
         email: 'som@som.com',
@@ -48,28 +49,35 @@ let waitingList = [
     }
 ]
 
-let resCount = 0;
+// app.get("/reservation/:reservation", function(req, res) {
+//   let reservation = req.params.reservation;
 
-app.get("/reservations/:reservation", function(req, res) {
-  let reservation = req.params.reservation;
+//   console.log(reservation);
 
+//   for (var i = 0; i < currentRes.length; i++) {
+//     if (reservation === currentRes[i].routeName) {
+//       return res.json(reservation[i]);
+//     }
+//   }
+//   return res.json(false);
+// });
 
-  console.log(reservation);
-
-  for (var i = 0; i < currentRes.length; i++) {
-    if (reservation === currentRes[i].routeName) {
-      return res.json(reservation[i]);
-    }
-  }
-  return res.json(false);
+//display all CURRENT reservations
+app.get("/tables", function(req, res) {
+  return res.json(currentRes);
 });
 
-  // app.post("/reservations", function(req, res) {
-
-  // })
-
+//create NEW reservations
 app.post("/reservation", function(req, res) {
   let reservation = req.body;
   console.log(reservation);
-  currentRes.push(reservation);
-})
+  reservation.routeName = reservation.userName.replace(/\s+/g, "").toLowerCase();
+  
+  if (currentRes.length < 5) {
+    currentRes.push(reservation);
+  } else {
+    waitingList.push(reservation);
+  }
+
+  res.json(reservation);
+});

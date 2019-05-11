@@ -21,6 +21,8 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Starts the server to begin listening
 // =============================================================
@@ -48,10 +50,20 @@ let waitingList = [
 
 let resCount = 0;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.get("/reservations/:reservation", function(req, res) {
+  let reservation = req.params.reservation;
 
-app.post("/reservations", function(req, res) {
+  console.log(reservation);
 
+  for (var i = 0; i < currentRes.length; i++) {
+    if (reservation === currentRes[i].routeName) {
+      return res.json(reservation[i]);
+    }
+  }
+  return res.json(false);
+});
+
+app.post("/reservation", function(req, res) {
+  let reservation = req.body;
+  currentRes.push(reservation);
 })
-

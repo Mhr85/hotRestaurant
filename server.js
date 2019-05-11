@@ -9,8 +9,8 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
-app.get("/reservationForm", function(req, res) {
-    res.sendFile(path.join(__dirname, "reservationForm.html"));
+app.get("/newsletter", function(req, res) {
+    res.sendFile(path.join(__dirname, "newsletter.html"));
   });
 
 app.get("/reservation", function(req, res) {

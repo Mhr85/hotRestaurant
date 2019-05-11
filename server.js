@@ -51,7 +51,7 @@ let resCount = 0;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post("/reservations", function(req, res) {
+  // app.post("/reservations", function(req, res) {
 
-})
+  // })
 

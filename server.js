@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT ||  3000;
 const path = require("path");
-
+const axios = require('axios');
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
@@ -21,6 +21,8 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Starts the server to begin listening
 // =============================================================
@@ -48,10 +50,26 @@ let waitingList = [
 
 let resCount = 0;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.get("/reservations/:reservation", function(req, res) {
+  let reservation = req.params.reservation;
+
+
+  console.log(reservation);
+
+  for (var i = 0; i < currentRes.length; i++) {
+    if (reservation === currentRes[i].routeName) {
+      return res.json(reservation[i]);
+    }
+  }
+  return res.json(false);
+});
 
   // app.post("/reservations", function(req, res) {
 
   // })
 
+app.post("/reservation", function(req, res) {
+  let reservation = req.body;
+  console.log(reservation);
+  currentRes.push(reservation);
+})

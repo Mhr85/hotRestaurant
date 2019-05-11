@@ -22,8 +22,6 @@
       res.sendFile(path.join(__dirname, "newsletter.html"));
     });
 
-
-
   app.get("/reservation", function(req, res) {
     res.sendFile(path.join(__dirname, "reservation.html"));
   });

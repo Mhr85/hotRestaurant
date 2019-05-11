@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const port = process.env.PORT ||  3000;
@@ -7,6 +8,10 @@ const path = require("path");
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
+
+app.get("/newsletter", function(req, res) {
+    res.sendFile(path.join(__dirname, "newsletter.html"));
+  });
 
 app.get("/reservation", function(req, res) {
   res.sendFile(path.join(__dirname, "reservation.html"));
@@ -49,3 +54,4 @@ app.use(express.json());
 app.post("/reservations", function(req, res) {
 
 })
+

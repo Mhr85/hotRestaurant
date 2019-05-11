@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT ||  3000;
 const path = require("path");
-
+const axios = require('axios');
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
@@ -65,5 +65,6 @@ app.get("/reservations/:reservation", function(req, res) {
 
 app.post("/reservation", function(req, res) {
   let reservation = req.body;
+  console.log(reservation);
   currentRes.push(reservation);
 })

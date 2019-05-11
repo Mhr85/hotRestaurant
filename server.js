@@ -1,34 +1,44 @@
+// GLOBAL VARIABLES
+//======================================================
+  
+  const express = require('express');
+  const app = express();
+  const port = process.env.PORT ||  3000;
+  const path = require("path");
+  const axios = require('axios');
 
-const express = require('express');
-const app = express();
-const port = process.env.PORT ||  3000;
-const path = require("path");
-const axios = require('axios');
+//======================================================
 
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "home.html"));
-});
 
-app.get("/newsletter", function(req, res) {
-    res.sendFile(path.join(__dirname, "newsletter.html"));
+// ROUTING
+//======================================================
+  
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "home.html"));
   });
 
-app.get("/reservation", function(req, res) {
-  res.sendFile(path.join(__dirname, "reservation.html"));
-});
+  app.get("/newsletter", function(req, res) {
+      res.sendFile(path.join(__dirname, "newsletter.html"));
+    });
 
-app.get("/tables", function(req, res) {
-  res.sendFile(path.join(__dirname, "tables.html"));
-});
+  app.get("/reservation", function(req, res) {
+    res.sendFile(path.join(__dirname, "reservation.html"));
+  });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+  app.get("/tables", function(req, res) {
+    res.sendFile(path.join(__dirname, "tables.html"));
+  });
 
-// Starts the server to begin listening
-// =============================================================
-app.listen(port, function() {
-  console.log("App listening on http://localhost:" + port);
-});
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
+
+
+
+  // Starts the server to begin listening
+  app.listen(port, function() {
+    console.log("App listening on http://localhost:" + port);
+  });
+//======================================================
 
 let currentRes = [
     {
@@ -52,7 +62,6 @@ let resCount = 0;
 
 app.get("/reservations/:reservation", function(req, res) {
   let reservation = req.params.reservation;
-
 
   console.log(reservation);
 
